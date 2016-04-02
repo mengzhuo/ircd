@@ -1,9 +1,18 @@
 package ircd
 
 import (
+	"encoding/json"
+	"io/ioutil"
 	"log"
 	"net"
 )
+
+type Config struct {
+	HostName    string `json:"hostname"`
+	Addr        string `json:"addr"`
+	ConnectAddr string `json:"connect"`
+	Password    string `json:"password"`
+}
 
 type Client struct {
 	HostName string
@@ -19,6 +28,11 @@ type Server struct {
 	HopCount int
 	Token    uint
 	Info     string
+}
+
+func checkAndLoadData(path string) {
+	err := json.Unmarshal(ioutil.ReadFile(path), &config)
+
 }
 
 func NewServer(addr string) {
