@@ -2,12 +2,14 @@ package main
 
 import (
 	"flag"
-	"ircd"
+
+	"github.com/mengzhuo/ircd"
 )
 
 func main() {
 	addr := flag.String("addr", ":6697", "default addr ircd listen to")
 	flag.Parse()
 
-	ircd.NewServer(*addr)
+	ircd.New(*addr, nil)
+	ircd.Listen()
 }
